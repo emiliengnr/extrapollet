@@ -1,0 +1,828 @@
+/* =========================================================================
+   Styles des composants & pages — « Grand Budapest Fox »
+   Aplats de couleur, cadres fins, doubles bordures, symétrie.
+   ========================================================================= */
+
+/* ----------------------------- EN-TÊTE ----------------------------- */
+.entete {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background-color: var(--creme);
+  border-bottom: 1px solid var(--encre);
+  box-shadow: 0 1px 0 0 var(--encre); /* double filet */
+  background-image: inherit;
+}
+
+.entete-rangee {
+  position: relative;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 0.9rem clamp(1rem, 4vw, 3rem);
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 1rem;
+}
+
+.nav-groupe {
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.6rem);
+}
+.nav-gauche {
+  justify-content: flex-start;
+}
+.nav-droite {
+  justify-content: flex-end;
+}
+
+.nav-lien {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  font-size: 0.78rem;
+  color: var(--encre);
+  padding-bottom: 3px;
+  border-bottom: 1px solid transparent;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.nav-lien:hover,
+.nav-lien.est-actif {
+  color: var(--accent, var(--bordeaux));
+  border-bottom-color: var(--accent, var(--bordeaux));
+}
+
+/* Marque calligraphiée, centrée */
+.marque {
+  text-align: center;
+  line-height: 0.8;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+}
+.marque-prenom,
+.marque-nom {
+  font-family: var(--font-marque);
+  color: var(--encre);
+}
+.marque-prenom {
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+}
+.marque-nom {
+  font-size: clamp(1.3rem, 3.2vw, 1.9rem);
+  margin-top: -0.35em;
+  margin-left: 1.4em;
+}
+
+/* Burger mobile */
+.nav-burger {
+  display: none;
+  position: absolute;
+  right: clamp(1rem, 4vw, 3rem);
+  top: 50%;
+  transform: translateY(-50%);
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  padding: 6px;
+}
+.nav-burger span {
+  width: 26px;
+  height: 2px;
+  background-color: var(--encre);
+}
+
+.nav-mobile {
+  display: none;
+  flex-direction: column;
+  border-top: 1px solid var(--encre);
+}
+.nav-mobile .nav-lien {
+  padding: 0.9rem 1.5rem;
+  border-bottom: 1px solid var(--creme-ombre);
+  text-align: center;
+}
+
+/* ----------------------------- PIED ----------------------------- */
+.pied {
+  border-top: 1px solid var(--encre);
+  box-shadow: 0 -1px 0 0 var(--encre);
+  text-align: center;
+  padding: 2.6rem 1.5rem 2.2rem;
+  background-color: var(--creme-clair);
+}
+.pied .filet {
+  margin-bottom: 1rem;
+}
+.pied-marque {
+  margin: 0;
+}
+.pied-marque .marque-prenom {
+  font-size: 2rem;
+}
+.pied-marque .marque-nom {
+  font-size: 1.6rem;
+  margin-left: 0.4em;
+}
+.pied-sous {
+  margin: 0.2rem 0 1.4rem;
+  color: var(--encre-doux);
+}
+.pied-nav {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.4rem;
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.74rem;
+}
+.pied-nav a {
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.4s ease;
+}
+.pied-nav a:hover {
+  border-bottom-color: var(--encre);
+}
+.pied-credit {
+  margin-top: 1.6rem;
+  color: var(--encre-doux);
+}
+
+/* ----------------------------- ACCUEIL ----------------------------- */
+.hero {
+  text-align: center;
+}
+.hero-bobine {
+  color: var(--bordeaux);
+  margin-bottom: 1rem;
+}
+.hero-cadre {
+  border: 1px solid var(--encre);
+  outline: 1px solid var(--encre);
+  outline-offset: 6px;
+  padding: 10px;
+  background-color: var(--creme-clair);
+  max-width: 880px;
+  margin: 0 auto;
+}
+.hero-plan {
+  position: relative;
+  aspect-ratio: 16 / 8.5;
+  overflow: hidden;
+  border: 1px solid var(--encre);
+  background-color: var(--encre);
+}
+
+/* Décor de tournage en aplats : carton, fenêtre sur la ville, sol */
+.hero-scene {
+  position: absolute;
+  inset: 0;
+}
+.scene-mur {
+  position: absolute;
+  inset: 0;
+  background-color: var(--renard);
+  opacity: 0.92;
+}
+.scene-sol {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 26%;
+  background-color: var(--encre);
+  opacity: 0.55;
+}
+.scene-fenetre {
+  position: absolute;
+  right: 12%;
+  top: 16%;
+  width: 26%;
+  height: 40%;
+  background-color: var(--sauge);
+  border: 4px solid var(--creme);
+  box-shadow: 0 0 0 1px var(--encre);
+}
+.scene-carton {
+  position: absolute;
+  background-color: var(--moutarde);
+  border: 1px solid var(--encre);
+}
+.scene-carton-a {
+  left: 12%;
+  bottom: 24%;
+  width: 13%;
+  height: 18%;
+}
+.scene-carton-b {
+  left: 19%;
+  bottom: 38%;
+  width: 11%;
+  height: 15%;
+  background-color: var(--creme-ombre);
+}
+.scene-carton-c {
+  left: 40%;
+  bottom: 20%;
+  width: 14%;
+  height: 16%;
+  background-color: var(--rose);
+}
+
+/* Bouton lecture, façon vieux projecteur */
+.hero-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background-color: var(--creme);
+  border: 1px solid var(--encre);
+  outline: 1px solid var(--creme);
+  outline-offset: 4px;
+  display: grid;
+  place-items: center;
+  transition: transform 0.5s ease, background-color 0.5s ease;
+}
+.hero-play:hover {
+  transform: translate(-50%, -50%) scale(1.06);
+  background-color: var(--moutarde);
+}
+.hero-play .triangle {
+  width: 0;
+  height: 0;
+  margin-left: 5px;
+  border-top: 13px solid transparent;
+  border-bottom: 13px solid transparent;
+  border-left: 21px solid var(--encre);
+}
+.hero-play.est-actif .triangle {
+  border: none;
+  width: 16px;
+  height: 18px;
+  margin-left: 0;
+  border-left: 5px solid var(--encre);
+  border-right: 5px solid var(--encre);
+}
+.hero-plaque {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  color: var(--creme);
+  background-color: rgba(46, 36, 29, 0.72);
+  padding: 0.35rem 0.7rem;
+  border: 1px solid var(--creme);
+}
+
+.hero-titre {
+  max-width: 720px;
+  margin: 2.6rem auto 0;
+}
+.hero-fonction {
+  color: var(--bordeaux);
+  margin-bottom: 0.8rem;
+}
+.hero-accroche {
+  font-size: clamp(1.8rem, 4.5vw, 3rem);
+  line-height: 1.08;
+  font-weight: 500;
+}
+.hero-sous {
+  font-size: 1.2rem;
+  color: var(--encre-doux);
+  margin-top: 1.1rem;
+}
+.hero-sous em {
+  font-style: italic;
+  color: var(--bordeaux);
+}
+.hero-actions {
+  margin-top: 1.9rem;
+  display: flex;
+  gap: 1.6rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.lien-souligne {
+  font-family: var(--font-label);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  font-size: 0.78rem;
+  border-bottom: 1px solid var(--encre);
+  padding-bottom: 3px;
+  transition: color 0.4s ease, border-color 0.4s ease;
+}
+.lien-souligne:hover {
+  color: var(--bordeaux);
+  border-color: var(--bordeaux);
+}
+
+/* Fiches d'introduction */
+.accueil-fiches {
+  margin-top: clamp(3rem, 7vw, 5rem);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.6rem;
+}
+.fiche-intro {
+  padding: 1.8rem 1.6rem;
+  text-align: center;
+}
+.fiche-intro .fiche-num {
+  color: var(--moutarde);
+  margin-bottom: 0.7rem;
+}
+.fiche-intro h3 {
+  font-size: 1.4rem;
+  margin-bottom: 0.5rem;
+}
+.fiche-intro p {
+  color: var(--encre-doux);
+  margin: 0;
+}
+
+/* ----------------------------- À PROPOS ----------------------------- */
+.carnet {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+  padding: 0;
+  overflow: hidden;
+}
+.carnet-reliure {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background-color: var(--creme-ombre);
+  box-shadow: -1px 0 0 var(--encre), 1px 0 0 var(--encre);
+}
+.carnet-page {
+  padding: clamp(1.8rem, 4vw, 3rem);
+}
+.carnet-gauche {
+  position: relative;
+  background-color: var(--creme-ombre);
+  min-height: 460px;
+}
+.polaroids {
+  position: relative;
+  height: 100%;
+  min-height: 380px;
+}
+.polaroid {
+  position: absolute;
+  width: 46%;
+  margin: 0;
+  background-color: var(--creme-clair);
+  padding: 8px 8px 30px;
+  border: 1px solid var(--encre);
+  box-shadow: 3px 5px 0 rgba(46, 36, 29, 0.18);
+}
+.polaroid-image {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+}
+.polaroid figcaption {
+  font-family: var(--font-label);
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  text-align: center;
+  margin-top: 8px;
+  color: var(--encre-doux);
+}
+.polaroid-1 {
+  top: 2%;
+  left: 4%;
+  transform: rotate(-6deg);
+}
+.polaroid-2 {
+  top: 8%;
+  right: 2%;
+  transform: rotate(5deg);
+}
+.polaroid-3 {
+  bottom: 4%;
+  left: 8%;
+  transform: rotate(4deg);
+}
+.polaroid-4 {
+  bottom: 10%;
+  right: 6%;
+  transform: rotate(-4deg);
+}
+.fox {
+  position: absolute;
+  bottom: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2rem;
+  filter: saturate(0.8);
+}
+
+.carnet-droite {
+  background-color: var(--creme-clair);
+}
+.carnet-titre {
+  font-family: var(--font-texte);
+  font-weight: 600;
+  font-size: clamp(1.8rem, 4vw, 2.4rem);
+  color: var(--bordeaux);
+  margin-bottom: 1.2rem;
+}
+.carnet-droite p {
+  font-size: 1.08rem;
+}
+.carnet-signature {
+  font-family: var(--font-marque);
+  font-size: 1.8rem;
+  color: var(--bordeaux);
+  margin-top: 0.5rem;
+}
+
+/* ----------------------------- PORTFOLIO ----------------------------- */
+.galerie-groupe {
+  margin-bottom: clamp(2.6rem, 6vw, 4.5rem);
+}
+.groupe-tete {
+  text-align: center;
+  margin-bottom: clamp(1.6rem, 4vw, 2.6rem);
+}
+.groupe-fiche {
+  display: inline-block;
+  background-color: var(--moutarde);
+  color: var(--encre);
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--encre);
+  margin-bottom: 0.9rem;
+}
+.groupe-nom {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  font-size: clamp(1.3rem, 3vw, 1.8rem);
+  color: var(--bordeaux);
+}
+
+.galerie {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.4rem, 4vw, 2.8rem);
+}
+.plaque {
+  margin: 0;
+  text-align: center;
+}
+.plaque-action {
+  display: block;
+  width: 100%;
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.plaque-action.est-avenir {
+  cursor: default;
+}
+.plaque-cadre {
+  border: 1px solid var(--encre);
+  outline: 1px solid var(--encre);
+  outline-offset: 5px;
+  padding: 8px;
+  background-color: var(--renard);
+  transition: transform 0.5s ease, box-shadow 0.5s ease;
+}
+.plaque-action:not(.est-avenir):hover .plaque-cadre {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 0 rgba(46, 36, 29, 0.16);
+}
+.plaque-image {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--encre);
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+}
+.plaque-categorie {
+  position: absolute;
+  z-index: 2;
+  left: 0.5rem;
+  bottom: 0.5rem;
+  color: var(--creme);
+  background-color: rgba(46, 36, 29, 0.72);
+  padding: 0.25rem 0.55rem;
+  border: 1px solid var(--creme);
+  font-size: 0.58rem;
+}
+/* Bouton lecture au survol, façon vieux projecteur */
+.plaque-play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.9);
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background-color: var(--creme);
+  border: 1px solid var(--encre);
+  outline: 1px solid var(--creme);
+  outline-offset: 3px;
+  display: grid;
+  place-items: center;
+  opacity: 0.85;
+  z-index: 3;
+  transition: transform 0.5s ease, background-color 0.5s ease, opacity 0.5s ease;
+}
+.plaque-action:hover .plaque-play {
+  transform: translate(-50%, -50%) scale(1);
+  background-color: var(--moutarde);
+  opacity: 1;
+}
+.plaque-play .triangle {
+  width: 0;
+  height: 0;
+  margin-left: 4px;
+  border-top: 9px solid transparent;
+  border-bottom: 9px solid transparent;
+  border-left: 15px solid var(--encre);
+}
+.plaque-lien {
+  font-family: var(--font-titre);
+  font-size: 1.6rem;
+  color: var(--encre);
+  line-height: 1;
+}
+.plaque-badge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 3;
+  color: var(--encre);
+  background-color: var(--creme);
+  padding: 0.35rem 0.8rem;
+  border: 1px solid var(--encre);
+}
+.plaque-bobine {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  width: 12px;
+  z-index: 2;
+  background-color: var(--encre);
+  background-image: repeating-linear-gradient(
+    var(--creme) 0 4px,
+    transparent 4px 12px
+  );
+  opacity: 0.4;
+}
+.plaque-legende {
+  display: block;
+  margin-top: 1rem;
+  color: var(--encre);
+}
+
+/* --------------------- Lightbox lecteur vidéo --------------------- */
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background-color: rgba(46, 36, 29, 0.88);
+  display: grid;
+  place-items: center;
+  padding: clamp(1rem, 4vw, 3rem);
+  animation: lever-rideau 0.4s ease both;
+}
+.lightbox-cadre {
+  width: min(960px, 100%);
+  background-color: var(--creme);
+  padding: 12px;
+}
+.lightbox-tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.3rem 0.4rem 0.7rem;
+}
+.lightbox-fermer {
+  background: none;
+  border: 1px solid var(--encre);
+  width: 30px;
+  height: 30px;
+  color: var(--encre);
+  line-height: 1;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.lightbox-fermer:hover {
+  background-color: var(--bordeaux);
+  color: var(--creme);
+}
+.lightbox-video {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  border: 1px solid var(--encre);
+  background-color: var(--encre);
+}
+.lightbox-video iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ----------------------------- SERVICES ----------------------------- */
+.fiches {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(1.6rem, 4vw, 3rem);
+  max-width: 860px;
+  margin: 0 auto;
+  justify-items: center;
+}
+.fiche {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  padding: 2.4rem 2rem 2.2rem;
+  background-color: var(--creme-clair);
+  /* Bords dentelés type papier découpé (texture, pas un dégradé) */
+  border: 1px dashed var(--encre);
+  outline: 1px solid var(--encre);
+  outline-offset: 5px;
+  text-align: center;
+  transition: transform 0.5s ease;
+}
+.fiche:hover {
+  transform: rotate(-0.6deg) translateY(-4px);
+}
+/* La 3e fiche centrée sous les deux premières, comme dans la maquette */
+.fiche:nth-child(3) {
+  grid-column: 1 / -1;
+}
+.fiche-onglet {
+  display: inline-block;
+  background-color: var(--moutarde);
+  color: var(--encre);
+  padding: 0.3rem 0.9rem;
+  border: 1px solid var(--encre);
+  margin-bottom: 1.2rem;
+}
+.fiche-titre {
+  font-family: var(--font-titre);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 1.4rem;
+  color: var(--bordeaux);
+}
+.fiche-filet {
+  width: 48px;
+  height: 1px;
+  background-color: var(--encre);
+  margin: 1rem auto;
+}
+.fiche-texte {
+  color: var(--encre-doux);
+  margin: 0;
+}
+
+/* ----------------------------- CONTACT ----------------------------- */
+.contact-grille {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(1.6rem, 4vw, 2.6rem);
+  align-items: start;
+}
+.contact-coordonnees,
+.contact-form {
+  padding: clamp(1.8rem, 4vw, 2.6rem);
+}
+.contact-num {
+  color: var(--moutarde);
+  margin-bottom: 1rem;
+}
+.contact-titre {
+  font-family: var(--font-texte);
+  font-weight: 600;
+  font-size: clamp(1.6rem, 3.5vw, 2.1rem);
+  color: var(--bordeaux);
+  margin-bottom: 0.8rem;
+  line-height: 1.1;
+}
+.contact-intro {
+  color: var(--encre-doux);
+}
+.contact-liste {
+  margin: 1.6rem 0 0;
+}
+.contact-liste > div {
+  padding: 0.9rem 0;
+  border-top: 1px solid var(--creme-ombre);
+}
+.contact-liste dt {
+  color: var(--encre-doux);
+  margin-bottom: 0.2rem;
+}
+.contact-liste dd {
+  margin: 0;
+  font-size: 1.15rem;
+}
+
+.champ {
+  display: block;
+  margin-bottom: 1.3rem;
+}
+.champ .label {
+  display: block;
+  margin-bottom: 0.4rem;
+  color: var(--encre-doux);
+}
+.champ input,
+.champ textarea {
+  width: 100%;
+  font-family: var(--font-texte);
+  font-size: 1.05rem;
+  color: var(--encre);
+  background-color: var(--creme);
+  border: 1px solid var(--encre);
+  padding: 0.7rem 0.85rem;
+  resize: vertical;
+}
+.champ input:focus,
+.champ textarea:focus {
+  outline: 1px solid var(--bordeaux);
+  outline-offset: 2px;
+}
+.contact-confirme {
+  margin-top: 1rem;
+  color: var(--sauge);
+}
+.contact-form .btn[disabled] {
+  background-color: var(--sauge);
+  color: var(--encre);
+  cursor: default;
+}
+
+/* ----------------------------- RESPONSIVE ----------------------------- */
+@media (max-width: 880px) {
+  .nav-gauche,
+  .nav-droite {
+    display: none;
+  }
+  .nav-burger {
+    display: flex;
+  }
+  .entete-rangee {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .nav-mobile.est-ouvert {
+    display: flex;
+  }
+  .accueil-fiches,
+  .galerie {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .carnet {
+    grid-template-columns: 1fr;
+  }
+  .carnet-reliure {
+    display: none;
+  }
+  .contact-grille {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .accueil-fiches,
+  .galerie,
+  .fiches {
+    grid-template-columns: 1fr;
+  }
+  .fiche:nth-child(3) {
+    grid-column: auto;
+  }
+  .hero-actions {
+    flex-direction: column;
+  }
+}
