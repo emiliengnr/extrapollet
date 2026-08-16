@@ -1,36 +1,34 @@
 import { useEffect, useState, type CSSProperties } from 'react'
 import { portfolioGroupes, type Project } from '../data/projects'
 
-/* Le cadre intérieur : vignette YouTube si disponible, sinon aplat de teinte. */
-function Cadre({ p }: { p: Project }) {
-  const style: CSSProperties = p.youtubeId
-    ? { backgroundImage: `url(https://img.youtube.com/vi/${p.youtubeId}/mqdefault.jpg)` }
-    : { backgroundColor: p.teinte }
-
-  /* Recadrage des vidéos cinémascope : on zoome pour masquer les bandes noires. */
-  if (p.youtubeId && p.recadrage) {
-    style.backgroundSize = `${(p.recadrage * 100).toFixed(0)}%`
-  }
-
+/* La photo du polaroïd : vignette YouTube si disponible, sinon aplat de teinte. */
+function Photo({ p, numero }: { p: Project; numero: number }) {
   return (
-    <div className="plaque-cadre">
-      <div className="plaque-image" style={style}>
-        {p.detail && <span className="plaque-categorie label">{p.detail}</span>}
+    <div className="tirage-photo" style={{ backgroundColor: p.teinte }}>
+      {p.youtubeId && (
+        <img
+          className="tirage-img"
+          /* Recadrage des vidéos cinémascope : on zoome pour masquer les bandes noires. */
+          style={{ '--zoom': p.recadrage ?? 1 } as CSSProperties}
+          src={`https://i.ytimg.com/vi/${p.youtubeId}/hqdefault.jpg`}
+          alt={`Image du film ${p.titre}`}
+          loading="lazy"
+        />
+      )}
 
-        {p.youtubeId && (
-          <span className="plaque-play" aria-hidden="true">
-            <span className="triangle" />
-          </span>
-        )}
-        {p.url && (
-          <span className="plaque-play plaque-lien" aria-hidden="true">
-            ↗
-          </span>
-        )}
-        {p.aVenir && <span className="plaque-badge label">Bientôt</span>}
+      <span className="tirage-no label">N° {String(numero).padStart(2, '0')}</span>
 
-        <span className="plaque-bobine" aria-hidden="true" />
-      </div>
+      {p.youtubeId && (
+        <span className="tirage-play" aria-hidden="true">
+          <span className="triangle" />
+        </span>
+      )}
+      {p.url && (
+        <span className="tirage-play tirage-lien" aria-hidden="true">
+          ↗
+        </span>
+      )}
+      {p.aVenir && <span className="tirage-badge label">Bientôt</span>}
     </div>
   )
 }
@@ -72,33 +70,41 @@ export default function Portfolio() {
 
           <div className="galerie">
             {groupe.projets.map((p, i) => (
-              <figure className="plaque" key={p.titre + p.annee + i}>
-                {p.youtubeId ? (
-                  <button
-                    type="button"
-                    className="plaque-action"
-                    onClick={() => setActif(p)}
-                    aria-label={`Lire la vidéo : ${p.titre} (${p.annee})`}
-                  >
-                    <Cadre p={p} />
-                  </button>
-                ) : p.url ? (
-                  <a
-                    className="plaque-action"
-                    href={p.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Voir : ${p.titre}`}
-                  >
-                    <Cadre p={p} />
-                  </a>
-                ) : (
-                  <div className="plaque-action est-avenir">
-                    <Cadre p={p} />
-                  </div>
-                )}
-                <figcaption className="plaque-legende label">
-                  {p.titre} — {p.annee}
+              <figure
+                className={`tirage cadre${p.youtubeId || p.url ? '' : ' est-avenir'}`}
+                key={p.titre + p.annee + i}
+              >
+                <Photo p={p} numero={i + 1} />
+
+                {/* La plaque manuscrite du polaroïd — le titre porte le lien,
+                    dont la zone cliquable est étendue à toute la vignette. */}
+                <figcaption className="tirage-plaque">
+                  <h3 className="tirage-titre">
+                    {p.youtubeId ? (
+                      <button
+                        type="button"
+                        className="tirage-action"
+                        onClick={() => setActif(p)}
+                        aria-label={`Lire la vidéo : ${p.titre} (${p.annee})`}
+                      >
+                        {p.titre}
+                      </button>
+                    ) : p.url ? (
+                      <a
+                        className="tirage-action"
+                        href={p.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Voir : ${p.titre} (${p.annee})`}
+                      >
+                        {p.titre}
+                      </a>
+                    ) : (
+                      p.titre
+                    )}
+                  </h3>
+                  {p.detail && <p className="tirage-meta label">{p.detail}</p>}
+                  <p className="tirage-annee">{p.annee}</p>
                 </figcaption>
               </figure>
             ))}

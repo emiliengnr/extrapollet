@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 import { navItems } from '../data/projects'
 
 export default function Footer() {
@@ -11,7 +11,7 @@ export default function Footer() {
         <span className="marque-prenom">Emilie</span>{' '}
         <span className="marque-nom">Pollet</span>
       </p>
-      <p className="label pied-sous">Maison de production · Archives 2021 — 2025</p>
+      <p className="label pied-sous">Coordination & production audiovisuelle · Depuis 2021</p>
       <nav className="pied-nav">
         <Link to="/">Accueil</Link>
         {navItems.map((i) => (
@@ -21,7 +21,7 @@ export default function Footer() {
         ))}
       </nav>
       <p className="label pied-credit">
-        © {new Date().getFullYear()} Emilie Pollet — Productrice audiovisuelle
+        © {new Date().getFullYear()} Emilie Pollet — Production audiovisuelle
       </p>
     </footer>
   )

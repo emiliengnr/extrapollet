@@ -72,16 +72,16 @@ export interface Service {
 /* Services — fiches type dossier d'archive. */
 export const services: Service[] = [
   {
-    titre: 'Direction de production',
+    titre: 'Coordination de production',
     fiche: 'Fiche n°01',
     texte:
-      "Pilotage global du projet : budget, planning, équipes et logistique. Je garantis la faisabilité d'un film de sa genèse à sa livraison.",
+      "Pilotage opérationnel du projet : plannings, ressources et livrables. Je fais le lien entre la direction et les équipes de production, du premier repérage à la livraison.",
   },
   {
-    titre: 'Chargée de production',
+    titre: 'Organisation de tournages',
     fiche: 'Fiche n°02',
     texte:
-      'Coordination du quotidien : contrats, autorisations, suivi comptable et relations prestataires. La rigueur administrative au service de la création.',
+      "Logistique de plateau et coordination des équipes techniques et artistiques, doublées d'un suivi administratif rigoureux. Rien n'est laissé au hasard le jour J.",
   },
   {
     titre: 'Assistanat de production',
@@ -89,6 +89,131 @@ export const services: Service[] = [
     texte:
       "Soutien opérationnel sur le terrain et en préparation. Organisation, repérages et gestion documentaire pour que rien ne soit laissé au hasard.",
   },
+]
+
+export interface Experience {
+  periode: string
+  poste: string
+  structure: string
+  missions: string[]
+}
+
+/* Parcours professionnel — du plus récent au plus ancien. */
+export const experiences: Experience[] = [
+  {
+    periode: '2025 — Ajd.',
+    poste: 'Chargée de coordination & production',
+    structure: 'Fractal (association)',
+    missions: [
+      'Pilotage opérationnel de projets audiovisuels',
+      'Coordination entre direction et équipes de production',
+      'Suivi des plannings, ressources et livrables',
+    ],
+  },
+  {
+    periode: '2025 — Ajd.',
+    poste: 'Chargée de production junior',
+    structure: 'Tech 5 (association)',
+    missions: [
+      'Pilotage opérationnel de projets audiovisuels',
+      'Coordination entre direction et équipes de production',
+      'Suivi des plannings, ressources et livrables',
+    ],
+  },
+  {
+    periode: '2024 — 2025',
+    poste: 'Chargée de communication (Service civique)',
+    structure: 'La Source — Ville de Poissy',
+    missions: [
+      'Déploiement de stratégies de communication digitale',
+      'Création de contenus et gestion des réseaux sociaux',
+      'Valorisation de projets artistiques et culturels',
+    ],
+  },
+  {
+    periode: '2024',
+    poste: 'Assistante de production',
+    structure: 'Goldenia Studios',
+    missions: [
+      'Organisation logistique de tournages',
+      'Coordination des équipes techniques et artistiques',
+      'Suivi administratif de production',
+    ],
+  },
+  {
+    periode: '2023',
+    poste: 'Community manager & chargée de casting (Stage)',
+    structure: 'Smith & Smith',
+    missions: [
+      'Organisation et gestion de castings',
+      'Accompagnement des talents',
+      'Gestion des réseaux sociaux',
+    ],
+  },
+  {
+    periode: '2022 — 2023',
+    poste: 'Community manager (Stage)',
+    structure: 'Fedhubs',
+    missions: [
+      'Animation éditoriale des réseaux sociaux',
+      'Production de contenus digitaux',
+    ],
+  },
+  {
+    periode: '2021',
+    poste: 'Assistante de production & rédaction (Stage)',
+    structure: 'Radio J',
+    missions: [
+      'Programmation des invités',
+      "Participation à la rédaction et à la préparation d'émissions",
+    ],
+  },
+]
+
+export interface Formation {
+  periode: string
+  intitule: string
+  etablissement: string
+}
+
+export const formations: Formation[] = [
+  {
+    periode: '2021 — 2024',
+    intitule: 'Bachelor Audiovisuel Production',
+    etablissement: 'ESIS Paris',
+  },
+  {
+    periode: '2017 — 2021',
+    intitule: 'Bac STMG — Communication & ressources humaines, option Cinéma',
+    etablissement: 'Lycée Marguerite de Navarre',
+  },
+]
+
+/* Compétences, outils et langues — les trois colonnes de la fiche métier. */
+export const competences: string[] = [
+  'Coordination de production audiovisuelle',
+  'Organisation de tournages',
+  'Gestion de projet',
+  'Suivi logistique et administratif',
+  'Management & gouvernance',
+  'Production vidéo',
+  'Communication digitale & contenus',
+]
+
+export const outils: string[] = [
+  'Premiere Pro',
+  'DaVinci Resolve',
+  'Suite Adobe',
+  'Adobe Express',
+  'Canva',
+  'Excel · PowerPoint',
+  'Suite Google',
+]
+
+export const langues: string[] = [
+  'Français — langue maternelle',
+  'Anglais — courant (B2)',
+  'Allemand — notions (A1)',
 ]
 
 export interface NavItem {

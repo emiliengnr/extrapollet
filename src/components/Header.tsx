@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router'
 import { navItems } from '../data/projects'
 
 /* Menu type « fiche d'archives » : symétrique autour de la marque calligraphiée. */

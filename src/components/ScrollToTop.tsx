@@ -1,5 +1,5 @@
 import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router'
 
 /* Remet la page en haut à chaque changement de « fiche ». */
 export default function ScrollToTop() {

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router'
 
 export default function Home() {
   const [joue, setJoue] = useState(false)
@@ -31,19 +31,19 @@ export default function Home() {
             </button>
 
             <p className="hero-plaque label">
-              {joue ? 'Lecture · bande démo' : 'Bande démo · 02:14'}
+              {joue ? 'Moteur — ça tourne' : 'Clap · Séquence 01'}
             </p>
           </div>
         </div>
 
         <div className="hero-titre apparition-2">
-          <p className="label hero-fonction">Productrice audiovisuelle</p>
+          <p className="label hero-fonction">Coordination & production audiovisuelle</p>
           <h1 className="hero-accroche">
-            Accompagner un film de sa genèse à sa distribution.
+            Tenir un projet de la préparation à la post-production.
           </h1>
           <p className="hero-sous">
-            Bienvenue dans la maison de production d'<em>Emilie Pollet</em> —
-            une collection d'archives, de souvenirs et de projets soignés.
+            Bienvenue dans les archives d'<em>Emilie Pollet</em> — coordination de
+            projets, organisation de tournages et gestion d'équipes.
           </p>
           <div className="hero-actions apparition-3">
             <Link to="/portfolio" className="btn">
@@ -60,18 +60,18 @@ export default function Home() {
       <section className="accueil-fiches">
         <article className="cadre fiche-intro apparition">
           <p className="label fiche-num">01</p>
-          <h3>8 projets produits</h3>
-          <p>Publicités et courts-métrages menés de la préparation au livrable.</p>
+          <h3>Bachelor Production</h3>
+          <p>Audiovisuel Production à l'ESIS Paris, après un Bac STMG option Cinéma.</p>
         </article>
         <article className="cadre fiche-intro apparition-2">
           <p className="label fiche-num">02</p>
-          <h3>4 stages accomplis</h3>
-          <p>Une expérience forgée à l'exigence des plateaux et des bureaux de production.</p>
+          <h3>Sept expériences</h3>
+          <p>Stages, service civique et postes en production et communication depuis 2021.</p>
         </article>
         <article className="cadre fiche-intro apparition-3">
           <p className="label fiche-num">03</p>
-          <h3>Gestion & droit</h3>
-          <p>Contrats, comptabilité et veille réglementaire maîtrisés de bout en bout.</p>
+          <h3>Toute la chaîne</h3>
+          <p>Plannings, ressources et livrables suivis de la préparation à la post-production.</p>
         </article>
       </section>
     </main>

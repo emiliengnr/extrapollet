@@ -1,3 +1,5 @@
+import { competences, experiences, formations, langues, outils } from '../data/projects'
+
 export default function APropos() {
   return (
     <main className="page apropos">
@@ -38,25 +40,105 @@ export default function APropos() {
         <div className="carnet-page carnet-droite">
           <h2 className="carnet-titre">Ça, c'est moi</h2>
           <p>
+            Professionnelle de la production audiovisuelle, j'ai de l'expérience en
+            coordination de projets, organisation de tournages et gestion d'équipes.
+          </p>
+          <p>
             J'ai su très tôt que je voulais évoluer dans l'audiovisuel, non pas à la
-            réalisation, mais à la production pour accompagner un projet de sa genèse à
-            sa distribution.
+            réalisation, mais à la production. J'ai donc commencé par une base solide en
+            management et en communication au lycée, option Cinéma, avant de valider mon
+            Bachelor Audiovisuel Production à l'ESIS Paris.
           </p>
           <p>
-            Pour y arriver, j'ai fait un choix stratégique : acquérir des bases solides
-            en gestion, droit et comptabilité avant de valider mon Bachelor en
-            Production Audiovisuelle (Bac+3). Ce bagage m'a donné une vraie longueur
-            d'avance.
-          </p>
-          <p>
-            Je ne suis pas restée dans la théorie. J'ai produit 8 projets (publicités,
-            courts-métrages) et accompli 4 stages. Ces expériences m'ont forgée à
-            l'exigence du métier : je maîtrise la création de contrats, la gestion
-            comptable, l'édition de documents clairs et la veille réglementaire.
+            Depuis, je pilote des projets pour deux associations, Fractal et Tech 5 :
+            plannings, ressources, livrables et coordination entre la direction et les
+            équipes. Je contribue à toutes les étapes d'une production, de la préparation
+            à la post-production.
           </p>
           <p className="carnet-signature">— Emilie</p>
         </div>
       </article>
+
+      {/* Le parcours, présenté comme un relevé d'archives daté */}
+      <section className="dossier apparition-3">
+        <div className="groupe-tete">
+          <span className="label groupe-fiche">Dossier n°01</span>
+          <h2 className="groupe-nom">Parcours</h2>
+          <div className="fiche-filet" aria-hidden="true" />
+        </div>
+
+        <ol className="parcours">
+          {experiences.map((e) => (
+            <li className="parcours-entree" key={e.poste + e.structure}>
+              <p className="parcours-date label">{e.periode}</p>
+              <div>
+                <h3 className="parcours-poste">{e.poste}</h3>
+                <p className="parcours-structure">{e.structure}</p>
+                <ul className="parcours-missions">
+                  {e.missions.map((m) => (
+                    <li key={m}>{m}</li>
+                  ))}
+                </ul>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="dossier apparition-3">
+        <div className="groupe-tete">
+          <span className="label groupe-fiche">Dossier n°02</span>
+          <h2 className="groupe-nom">Formation</h2>
+          <div className="fiche-filet" aria-hidden="true" />
+        </div>
+
+        <ol className="parcours">
+          {formations.map((f) => (
+            <li className="parcours-entree" key={f.intitule}>
+              <p className="parcours-date label">{f.periode}</p>
+              <div>
+                <h3 className="parcours-poste">{f.intitule}</h3>
+                <p className="parcours-structure">{f.etablissement}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </section>
+
+      <section className="dossier apparition-3">
+        <div className="groupe-tete">
+          <span className="label groupe-fiche">Dossier n°03</span>
+          <h2 className="groupe-nom">Compétences</h2>
+          <div className="fiche-filet" aria-hidden="true" />
+        </div>
+
+        <div className="cartes-info">
+          <article className="cadre carte-info">
+            <p className="label carte-info-tete">Savoir-faire</p>
+            <ul className="liste-pointee">
+              {competences.map((c) => (
+                <li key={c}>{c}</li>
+              ))}
+            </ul>
+          </article>
+          <article className="cadre carte-info">
+            <p className="label carte-info-tete">Outils</p>
+            <ul className="liste-pointee">
+              {outils.map((o) => (
+                <li key={o}>{o}</li>
+              ))}
+            </ul>
+          </article>
+          <article className="cadre carte-info">
+            <p className="label carte-info-tete">Langues</p>
+            <ul className="liste-pointee">
+              {langues.map((l) => (
+                <li key={l}>{l}</li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </section>
     </main>
   )
 }

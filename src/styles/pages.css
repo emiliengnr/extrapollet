@@ -452,7 +452,91 @@
   margin-top: 0.5rem;
 }
 
+/* Relevé d'archives : une date en marge, la fiche en regard */
+.dossier {
+  margin-top: clamp(2.6rem, 6vw, 4.5rem);
+}
+.parcours {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.parcours-entree {
+  display: grid;
+  grid-template-columns: 8.5rem 1fr;
+  gap: 0 clamp(1rem, 3vw, 2rem);
+  padding: 1.2rem 0;
+  border-top: 1px solid var(--creme-ombre);
+}
+.parcours-entree:last-child {
+  border-bottom: 1px solid var(--creme-ombre);
+}
+.parcours-date {
+  margin: 0;
+  padding-top: 0.35em;
+  color: var(--bordeaux);
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+}
+.parcours-poste {
+  font-family: var(--font-titre);
+  font-weight: 600;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.parcours-structure {
+  margin: 0.15rem 0 0;
+  font-style: italic;
+  color: var(--encre-doux);
+}
+.parcours-missions {
+  margin: 0.6rem 0 0;
+  padding-left: 1.1rem;
+  color: var(--encre-doux);
+  font-size: 0.95rem;
+}
+.parcours-missions li {
+  margin-bottom: 0.15rem;
+}
+.parcours-missions li::marker {
+  color: var(--moutarde);
+}
+
+/* Trois cartons : savoir-faire, outils, langues */
+.cartes-info {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+  align-items: start;
+}
+.carte-info {
+  padding: clamp(1.3rem, 3vw, 1.8rem);
+}
+.carte-info-tete {
+  color: var(--moutarde);
+  margin-bottom: 1rem;
+}
+.liste-pointee {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.liste-pointee li {
+  padding: 0.45rem 0;
+  border-top: 1px solid var(--creme-ombre);
+  font-size: 1rem;
+}
+.liste-pointee li:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
 /* ----------------------------- PORTFOLIO ----------------------------- */
+/* La galerie respire plus large que les autres pages : les tirages priment
+   sur les marges. */
+.page.portfolio {
+  max-width: 1520px;
+}
 .galerie-groupe {
   margin-bottom: clamp(2.6rem, 6vw, 4.5rem);
 }
@@ -480,62 +564,87 @@
 .galerie {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: clamp(1.4rem, 4vw, 2.8rem);
+  gap: clamp(1.2rem, 2.5vw, 2rem);
+  /* Sans cela, l'étirement des cellules écraserait le format carré des cartons */
+  align-items: start;
 }
-.plaque {
-  margin: 0;
-  text-align: center;
-}
-.plaque-action {
-  display: block;
-  width: 100%;
-  padding: 0;
-  border: none;
-  background: none;
-  color: inherit;
-  font: inherit;
-  cursor: pointer;
-}
-.plaque-action.est-avenir {
-  cursor: default;
-}
-.plaque-cadre {
-  border: 1px solid var(--encre);
-  outline: 1px solid var(--encre);
-  outline-offset: 5px;
-  padding: 8px;
-  background-color: var(--renard);
-  transition: transform 0.5s ease, box-shadow 0.5s ease;
-}
-.plaque-action:not(.est-avenir):hover .plaque-cadre {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 0 rgba(46, 36, 29, 0.16);
-}
-.plaque-image {
+/* Chaque film est présenté comme un polaroïd : photo cernée de crème,
+   large marge basse tenant lieu de plaque manuscrite. */
+.tirage {
   position: relative;
-  aspect-ratio: 16 / 9;
-  border: 1px solid var(--encre);
-  overflow: hidden;
-  background-size: cover;
-  background-position: center;
+  margin: 0;
+  /* Le carton est carré : la photo garde son 16/9, la marge basse prend le reste */
+  aspect-ratio: 1 / 1;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.6s ease;
 }
-.plaque-categorie {
+.tirage:not(.est-avenir):hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 0 -2px rgba(46, 36, 29, 0.14);
+}
+.tirage:focus-within {
+  outline-color: var(--bordeaux);
+  outline-width: 2px;
+}
+
+/* La vignette YouTube entière, en 16/9 */
+.tirage-photo {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 10px 10px 0;
+  aspect-ratio: 16 / 9;
+  border: var(--bordure-fine);
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+.tirage-img {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Recadre les vidéos cinémascope pour masquer les bandes noires */
+  transform: scale(var(--zoom, 1));
+  transform-origin: center;
+  filter: saturate(0.92) contrast(0.97);
+  transition: transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), filter 0.6s ease;
+}
+.tirage:not(.est-avenir):hover .tirage-img {
+  transform: scale(calc(var(--zoom, 1) * 1.05));
+  filter: none;
+}
+/* Voile chaud posé sur la photo, façon tirage argentique */
+.tirage-photo::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background-color: rgba(46, 36, 29, 0.16);
+  transition: background-color 0.6s ease;
+}
+.tirage:not(.est-avenir):hover .tirage-photo::before {
+  background-color: rgba(46, 36, 29, 0.04);
+}
+.tirage-no {
   position: absolute;
   z-index: 2;
-  left: 0.5rem;
-  bottom: 0.5rem;
+  top: 0.5rem;
+  left: 0.6rem;
   color: var(--creme);
-  background-color: rgba(46, 36, 29, 0.72);
-  padding: 0.25rem 0.55rem;
-  border: 1px solid var(--creme);
   font-size: 0.58rem;
+  opacity: 0.75;
+  text-shadow: 0 1px 3px rgba(46, 36, 29, 0.6);
 }
-/* Bouton lecture au survol, façon vieux projecteur */
-.plaque-play {
+/* Bouton lecture, façon vieux projecteur — s'anime au survol */
+.tirage-play {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.9);
+  transform: translate(-50%, -50%) scale(0.86);
   width: 54px;
   height: 54px;
   border-radius: 50%;
@@ -545,16 +654,17 @@
   outline-offset: 3px;
   display: grid;
   place-items: center;
-  opacity: 0.85;
+  opacity: 0.55;
   z-index: 3;
   transition: transform 0.5s ease, background-color 0.5s ease, opacity 0.5s ease;
 }
-.plaque-action:hover .plaque-play {
+.tirage:hover .tirage-play,
+.tirage:focus-within .tirage-play {
   transform: translate(-50%, -50%) scale(1);
   background-color: var(--moutarde);
   opacity: 1;
 }
-.plaque-play .triangle {
+.tirage-play .triangle {
   width: 0;
   height: 0;
   margin-left: 4px;
@@ -562,13 +672,13 @@
   border-bottom: 9px solid transparent;
   border-left: 15px solid var(--encre);
 }
-.plaque-lien {
+.tirage-lien {
   font-family: var(--font-titre);
   font-size: 1.6rem;
   color: var(--encre);
   line-height: 1;
 }
-.plaque-badge {
+.tirage-badge {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -579,24 +689,54 @@
   padding: 0.35rem 0.8rem;
   border: 1px solid var(--encre);
 }
-.plaque-bobine {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  width: 12px;
-  z-index: 2;
-  background-color: var(--encre);
-  background-image: repeating-linear-gradient(
-    var(--creme) 0 4px,
-    transparent 4px 12px
-  );
-  opacity: 0.4;
-}
-.plaque-legende {
-  display: block;
-  margin-top: 1rem;
+
+/* La marge basse, plus haute que les autres — la signature du polaroïd.
+   Elle occupe toute la hauteur restante du carton carré. */
+.tirage-plaque {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 0.7rem 10px 10px;
+  padding: 0.6rem 0.7rem 0.4rem;
+  border-top: 1px solid rgba(46, 36, 29, 0.22);
   color: var(--encre);
+}
+.tirage-titre {
+  font-family: var(--font-titre);
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.tirage-meta {
+  margin: 0.45rem 0 0.3rem;
+  color: var(--encre-doux);
+  font-size: 0.6rem;
+}
+.tirage-annee {
+  margin: 0;
+  font-family: var(--font-label);
+  font-size: 0.85rem;
+  color: var(--bordeaux);
+}
+/* Le titre porte le lien ; sa zone cliquable couvre tout le polaroïd. */
+.tirage-action {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.tirage-action::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+}
+.tirage-action:focus-visible {
+  outline: none;
 }
 
 /* --------------------- Lightbox lecteur vidéo --------------------- */
@@ -706,14 +846,10 @@
 }
 
 /* ----------------------------- CONTACT ----------------------------- */
-.contact-grille {
-  display: grid;
-  grid-template-columns: 1fr 1.1fr;
-  gap: clamp(1.6rem, 4vw, 2.6rem);
-  align-items: start;
-}
-.contact-coordonnees,
-.contact-form {
+/* Une fiche unique, posée au centre du bureau */
+.contact-coordonnees {
+  max-width: 640px;
+  margin-inline: auto;
   padding: clamp(1.8rem, 4vw, 2.6rem);
 }
 .contact-num {
@@ -746,41 +882,33 @@
   margin: 0;
   font-size: 1.15rem;
 }
+.contact-reseaux {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+}
+.contact-lien {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  transition: color 0.4s ease;
+}
+.contact-lien:hover,
+.contact-lien:focus-visible {
+  color: var(--bordeaux);
+}
+/* Pictogrammes au trait fin, à l'unisson des filets et des cadres */
+.icone {
+  width: 1.05em;
+  height: 1.05em;
+  flex: none;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 
-.champ {
-  display: block;
-  margin-bottom: 1.3rem;
-}
-.champ .label {
-  display: block;
-  margin-bottom: 0.4rem;
-  color: var(--encre-doux);
-}
-.champ input,
-.champ textarea {
-  width: 100%;
-  font-family: var(--font-texte);
-  font-size: 1.05rem;
-  color: var(--encre);
-  background-color: var(--creme);
-  border: 1px solid var(--encre);
-  padding: 0.7rem 0.85rem;
-  resize: vertical;
-}
-.champ input:focus,
-.champ textarea:focus {
-  outline: 1px solid var(--bordeaux);
-  outline-offset: 2px;
-}
-.contact-confirme {
-  margin-top: 1rem;
-  color: var(--sauge);
-}
-.contact-form .btn[disabled] {
-  background-color: var(--sauge);
-  color: var(--encre);
-  cursor: default;
-}
 
 /* ----------------------------- RESPONSIVE ----------------------------- */
 @media (max-width: 880px) {
@@ -808,8 +936,12 @@
   .carnet-reliure {
     display: none;
   }
-  .contact-grille {
+  .cartes-info {
     grid-template-columns: 1fr;
+  }
+  .parcours-entree {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
   }
 }
 
@@ -818,6 +950,11 @@
   .galerie,
   .fiches {
     grid-template-columns: 1fr;
+  }
+  /* Sur une colonne, on borne le carton pour qu'il reste à taille de tirage */
+  .tirage {
+    max-width: 380px;
+    margin-inline: auto;
   }
   .fiche:nth-child(3) {
     grid-column: auto;
